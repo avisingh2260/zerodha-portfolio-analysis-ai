@@ -1,0 +1,156 @@
+.news-ticker-container {
+  width: 100%;
+  background: linear-gradient(135deg, #1a1f2e 0%, #252d3d 100%);
+  border: 1px solid #3a4556;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.ticker-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, #252d3d 0%, #1e2530 100%);
+  border-bottom: 2px solid #3a4556;
+}
+
+.ticker-label {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #E8E9ED;
+  letter-spacing: 0.5px;
+}
+
+.ticker-status {
+  font-size: 0.85rem;
+  color: #8B92A8;
+}
+
+.ticker-status.error {
+  color: #e74c3c;
+}
+
+.ticker-refresh-btn {
+  padding: 6px 14px;
+  background: #2c3548;
+  border: 1px solid #3a4556;
+  border-radius: 4px;
+  color: #E8E9ED;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-weight: 600;
+}
+
+.ticker-refresh-btn:hover {
+  background: #3a4556;
+  transform: translateY(-1px);
+}
+
+.wire-feed {
+  background: #1e2530;
+  max-height: 600px;
+  overflow-y: auto;
+  padding: 0;
+}
+
+.wire-feed::-webkit-scrollbar {
+  width: 8px;
+}
+
+.wire-feed::-webkit-scrollbar-track {
+  background: #1a1f2b;
+}
+
+.wire-feed::-webkit-scrollbar-thumb {
+  background: #3a4556;
+  border-radius: 4px;
+}
+
+.wire-feed::-webkit-scrollbar-thumb:hover {
+  background: #4a5566;
+}
+
+.wire-item {
+  padding: 16px 20px;
+  transition: background 0.2s;
+}
+
+.wire-item:hover {
+  background: #252d3d;
+}
+
+.wire-item-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.wire-time {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 0.85rem;
+  color: #6c757d;
+  font-weight: 600;
+  min-width: 60px;
+}
+
+.wire-ticker-badge {
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  font-family: 'Roboto Mono', monospace;
+  letter-spacing: 0.5px;
+}
+
+.wire-sentiment-badge {
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.wire-content {
+  color: #C1C6D4;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-left: 72px;
+  padding-right: 20px;
+}
+
+.wire-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #3a4556 50%, transparent);
+  margin: 0 20px;
+}
+
+.ticker-footer {
+  padding: 8px 20px;
+  background: #1a1f2b;
+  border-top: 1px solid #3a4556;
+  font-size: 0.75rem;
+  color: #6c757d;
+  text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .ticker-wrapper {
+    height: 80px;
+  }
+
+  .ticker-content {
+    animation: scroll 90s linear infinite;
+  }
+
+  .ticker-text {
+    max-width: 300px;
+  }
+}

@@ -1,0 +1,395 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto Mono', 'Courier New', monospace, -apple-system, BlinkMacSystemFont, 'Segoe UI';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #0A0E27;
+  color: #E8E9ED;
+}
+
+.app {
+  min-height: 100vh;
+  padding: 10px;
+}
+
+.container {
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.header {
+  background: #151B35;
+  padding: 20px;
+  border-radius: 2px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  border-left: 4px solid #FF6600;
+}
+
+.header h1 {
+  color: #FF6600;
+  margin-bottom: 10px;
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.header p {
+  color: #8B92A8;
+  font-size: 0.85rem;
+}
+
+.card {
+  background: #151B35;
+  padding: 16px;
+  border-radius: 2px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  margin-bottom: 10px;
+  border: 1px solid #1E2847;
+}
+
+.card h2 {
+  color: #FF6600;
+  margin-bottom: 16px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid #1E2847;
+  padding-bottom: 8px;
+}
+
+.upload-section {
+  border: 2px dashed #2E3856;
+  border-radius: 2px;
+  padding: 30px;
+  text-align: center;
+  background: #0F1424;
+  transition: all 0.3s;
+}
+
+.upload-section:hover {
+  border-color: #FF6600;
+  background: #151B35;
+}
+
+.upload-section input[type="file"] {
+  display: none;
+}
+
+.upload-label {
+  display: inline-block;
+  padding: 12px 24px;
+  background: #FF6600;
+  color: #0A0E27;
+  border-radius: 2px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: background 0.3s;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+}
+
+.upload-label:hover {
+  background: #FF8833;
+}
+
+.portfolio-list {
+  display: grid;
+  gap: 10px;
+}
+
+.portfolio-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px;
+  background: #0F1424;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background 0.2s;
+  border: 1px solid #1E2847;
+}
+
+.portfolio-item:hover {
+  background: #1A2139;
+  border-color: #FF6600;
+}
+
+.portfolio-info h3 {
+  color: #E8E9ED;
+  margin-bottom: 4px;
+  font-size: 0.95rem;
+}
+
+.portfolio-info p {
+  color: #8B92A8;
+  font-size: 0.8rem;
+}
+
+.btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.5px;
+}
+
+.btn-primary {
+  background: #FF6600;
+  color: #0A0E27;
+}
+
+.btn-primary:hover {
+  background: #FF8833;
+}
+
+.btn-danger {
+  background: #CC1F2E;
+  color: #E8E9ED;
+}
+
+.btn-danger:hover {
+  background: #AA1926;
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.metric-card {
+  background: #0F1424;
+  color: #E8E9ED;
+  padding: 16px;
+  border-radius: 2px;
+  border: 1px solid #1E2847;
+  border-left: 4px solid #4A90E2;
+}
+
+.metric-card.positive {
+  border-left-color: #00C853;
+}
+
+.metric-card.negative {
+  border-left-color: #CC1F2E;
+}
+
+.metric-card h3 {
+  font-size: 0.75rem;
+  color: #8B92A8;
+  opacity: 0.9;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.metric-card .value {
+  font-size: 1.8rem;
+  font-weight: 700;
+  font-family: 'Roboto Mono', monospace;
+}
+
+.holdings-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 16px;
+  font-size: 0.85rem;
+}
+
+.holdings-table th,
+.holdings-table td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #1E2847;
+}
+
+.holdings-table th {
+  background: #0A0E27;
+  color: #FF6600;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.5px;
+  position: sticky;
+  top: 0;
+}
+
+.holdings-table td {
+  color: #E8E9ED;
+  font-family: 'Roboto Mono', monospace;
+}
+
+.holdings-table tr:hover {
+  background: #1A2139;
+}
+
+.positive {
+  color: #00C853;
+  font-weight: 600;
+}
+
+.negative {
+  color: #CC1F2E;
+  font-weight: 600;
+}
+
+.insights-list {
+  display: grid;
+  gap: 8px;
+}
+
+.insight {
+  padding: 12px;
+  border-radius: 2px;
+  border-left: 4px solid;
+  background: #0F1424;
+  font-size: 0.85rem;
+}
+
+.insight.success {
+  background: #0F1F15;
+  border-color: #00C853;
+  color: #E8E9ED;
+}
+
+.insight.info {
+  background: #0F1824;
+  border-color: #4A90E2;
+  color: #E8E9ED;
+}
+
+.insight.warning {
+  background: #1F1B0F;
+  border-color: #FFA726;
+  color: #E8E9ED;
+}
+
+.insight.error {
+  background: #1F0F10;
+  border-color: #CC1F2E;
+  color: #E8E9ED;
+}
+
+.chart-container {
+  margin-top: 10px;
+  padding: 16px;
+  background: #0F1424;
+  border-radius: 2px;
+  border: 1px solid #1E2847;
+}
+
+.loading {
+  text-align: center;
+  padding: 40px;
+  color: #8B92A8;
+}
+
+.error {
+  background: #1F0F10;
+  border: 1px solid #CC1F2E;
+  color: #FF6B6B;
+  padding: 16px;
+  border-radius: 2px;
+  margin-bottom: 10px;
+}
+
+/* Bloomberg-style grid layout */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.grid-item {
+  background: #151B35;
+  border: 1px solid #1E2847;
+  border-radius: 2px;
+  padding: 12px;
+}
+
+.grid-item.span-12 { grid-column: span 12; }
+.grid-item.span-8 { grid-column: span 8; }
+.grid-item.span-6 { grid-column: span 6; }
+.grid-item.span-4 { grid-column: span 4; }
+.grid-item.span-3 { grid-column: span 3; }
+
+/* Chart customizations */
+.recharts-text {
+  fill: #8B92A8 !important;
+  font-size: 0.75rem;
+}
+
+.recharts-cartesian-axis-tick-value {
+  fill: #8B92A8 !important;
+}
+
+.recharts-legend-item-text {
+  color: #E8E9ED !important;
+  font-size: 0.8rem;
+}
+
+/* Ticker display */
+.ticker-display {
+  display: flex;
+  gap: 20px;
+  padding: 10px;
+  background: #0A0E27;
+  border-radius: 2px;
+  overflow-x: auto;
+  white-space: nowrap;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 0.8rem;
+}
+
+.ticker-item {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.ticker-symbol {
+  color: #FF6600;
+  font-weight: 700;
+}
+
+.ticker-value {
+  color: #E8E9ED;
+}
+
+.ticker-change {
+  font-weight: 600;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0A0E27;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1E2847;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2E3856;
+}

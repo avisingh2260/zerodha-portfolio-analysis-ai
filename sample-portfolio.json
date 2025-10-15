@@ -1,0 +1,104 @@
+{
+  "clientId": "CLIENT_001",
+  "portfolioName": "Diversified Growth Portfolio",
+  "currency": "USD",
+  "asOfDate": "2025-10-12",
+  "holdings": [
+    {
+      "ticker": "AAPL",
+      "quantity": 150,
+      "purchasePrice": 150.00,
+      "purchaseDate": "2024-01-15"
+    },
+    {
+      "ticker": "MSFT",
+      "quantity": 80,
+      "purchasePrice": 350.00,
+      "purchaseDate": "2024-03-20"
+    },
+    {
+      "ticker": "GOOGL",
+      "quantity": 200,
+      "purchasePrice": 140.00,
+      "purchaseDate": "2024-05-10"
+    },
+    {
+      "ticker": "NVDA",
+      "quantity": 120,
+      "purchasePrice": 450.00,
+      "purchaseDate": "2024-02-28"
+    },
+    {
+      "ticker": "TSLA",
+      "quantity": 100,
+      "purchasePrice": 200.00,
+      "purchaseDate": "2024-04-15"
+    },
+    {
+      "ticker": "JPM",
+      "quantity": 250,
+      "purchasePrice": 145.00,
+      "purchaseDate": "2024-06-01"
+    },
+    {
+      "ticker": "JNJ",
+      "quantity": 180,
+      "purchasePrice": 155.00,
+      "purchaseDate": "2024-07-10"
+    },
+    {
+      "ticker": "VOO",
+      "quantity": 150,
+      "purchasePrice": 420.00,
+      "purchaseDate": "2024-01-05"
+    },
+    {
+      "ticker": "BND",
+      "quantity": 800,
+      "purchasePrice": 75.50,
+      "purchaseDate": "2024-02-12"
+    },
+    {
+      "ticker": "XOM",
+      "quantity": 320,
+      "purchasePrice": 105.00,
+      "purchaseDate": "2024-08-20"
+    },
+    {
+      "ticker": "DIS",
+      "quantity": 280,
+      "purchasePrice": 85.00,
+      "purchaseDate": "2024-09-05"
+    },
+    {
+      "ticker": "VNQ",
+      "quantity": 450,
+      "purchasePrice": 82.00,
+      "purchaseDate": "2024-03-15"
+    },
+    {
+      "ticker": "AMD",
+      "quantity": 140,
+      "purchasePrice": 135.00,
+      "purchaseDate": "2024-05-28"
+    },
+    {
+      "ticker": "PG",
+      "quantity": 220,
+      "purchasePrice": 155.00,
+      "purchaseDate": "2024-04-08"
+    },
+    {
+      "ticker": "GLD",
+      "quantity": 350,
+      "purchasePrice": 185.00,
+      "purchaseDate": "2024-07-22"
+    },
+    {
+      "ticker": "AMZN",
+      "quantity": 95,
+      "purchasePrice": 145.00,
+      "purchaseDate": "2024-06-18"
+    }
+  ]
+}
