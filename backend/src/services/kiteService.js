@@ -1,4 +1,5 @@
 import { KiteConnect } from 'kiteconnect';
+import { db } from '../db/database.js';
 
 class KiteService {
   constructor() {
@@ -6,12 +7,15 @@ class KiteService {
     this._initialized = false;
   }
 
-  _initialize() {
+  async _initialize() {
     if (this._initialized) return;
 
     this.apiKey = process.env.KITE_API_KEY;
     this.apiSecret = process.env.KITE_API_SECRET;
-    this.accessToken = process.env.KITE_ACCESS_TOKEN;
+
+    // Try to get access token from database first, fallback to env
+    const storedToken = await this.getStoredAccessToken();
+    this.accessToken = storedToken || process.env.KITE_ACCESS_TOKEN;
 
     if (this.apiKey && this.accessToken) {
       this.kite = new KiteConnect({
@@ -21,12 +25,43 @@ class KiteService {
       console.log('✅ Kite Connect service initialized');
       this._initialized = true;
     } else {
-      console.log('⚠️  Kite Connect credentials not found. Set KITE_API_KEY and KITE_ACCESS_TOKEN in .env');
+      console.log('⚠️  Kite Connect credentials not found. Connect via UI or set KITE_API_KEY and KITE_ACCESS_TOKEN in .env');
     }
   }
 
-  isConfigured() {
-    this._initialize();
+  async getStoredAccessToken() {
+    try {
+      const setting = await db.settings.findOne({ key: 'kite_access_token' });
+      return setting?.value;
+    } catch (error) {
+      console.error('Error reading access token from database:', error);
+      return null;
+    }
+  }
+
+  async saveAccessToken(accessToken) {
+    try {
+      await db.settings.update(
+        { key: 'kite_access_token' },
+        { key: 'kite_access_token', value: accessToken },
+        { upsert: true }
+      );
+      this.accessToken = accessToken;
+
+      // Re-initialize with new token
+      if (this.kite) {
+        this.kite.setAccessToken(accessToken);
+      }
+
+      console.log('✅ Kite access token saved to database');
+    } catch (error) {
+      console.error('Error saving access token:', error);
+      throw error;
+    }
+  }
+
+  async isConfigured() {
+    await this._initialize();
     return !!(this.apiKey && this.accessToken && this.kite);
   }
 
@@ -137,9 +172,13 @@ class KiteService {
     });
 
     const session = await kite.generateSession(requestToken, this.apiSecret);
-    this.accessToken = session.access_token;
+
+    // Save access token to database
+    await this.saveAccessToken(session.access_token);
+
     this.kite = kite;
-    this.kite.setAccessToken(this.accessToken);
+    this.kite.setAccessToken(session.access_token);
+    this._initialized = true;
 
     return session;
   }

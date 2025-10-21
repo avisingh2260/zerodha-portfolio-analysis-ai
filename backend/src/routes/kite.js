@@ -11,15 +11,22 @@ function generateId() {
 }
 
 // Get Kite login URL
-router.get('/login-url', (req, res) => {
+router.get('/login-url', async (req, res) => {
   try {
-    if (!kiteService.isConfigured()) {
+    const { redirect_url } = req.query;
+
+    if (!process.env.KITE_API_KEY) {
       return res.status(400).json({
         error: 'Kite API Key not configured. Please set KITE_API_KEY in .env'
       });
     }
 
-    const loginUrl = kiteService.getLoginUrl();
+    // Build login URL with redirect parameter
+    let loginUrl = kiteService.getLoginUrl();
+    if (redirect_url) {
+      loginUrl += `&redirect_params=${encodeURIComponent(JSON.stringify({ redirect_url }))}`;
+    }
+
     res.json({
       success: true,
       loginUrl,
@@ -32,6 +39,34 @@ router.get('/login-url', (req, res) => {
 });
 
 // Handle OAuth callback and generate session
+// Kite redirects here with request_token as query param
+router.get('/callback', async (req, res) => {
+  try {
+    const { request_token, status } = req.query;
+
+    // Check if user denied access
+    if (status === 'error' || !request_token) {
+      const errorMsg = status === 'error' ? 'User denied access' : 'No request token provided';
+      // Redirect to frontend with error
+      return res.redirect(`http://localhost:3000?kite_auth=error&message=${encodeURIComponent(errorMsg)}`);
+    }
+
+    console.log('📥 Received Kite OAuth callback with request_token');
+
+    // Exchange request token for access token
+    const session = await kiteService.generateSession(request_token);
+
+    console.log('✅ Kite session generated and saved to database');
+
+    // Redirect to frontend with success
+    res.redirect(`http://localhost:3000?kite_auth=success`);
+  } catch (error) {
+    console.error('❌ Error generating Kite session:', error);
+    res.redirect(`http://localhost:3000?kite_auth=error&message=${encodeURIComponent(error.message)}`);
+  }
+});
+
+// Also support POST for manual testing
 router.post('/callback', async (req, res) => {
   try {
     const { request_token } = req.body;
@@ -44,9 +79,8 @@ router.post('/callback', async (req, res) => {
 
     res.json({
       success: true,
-      message: 'Session generated successfully',
-      accessToken: session.access_token,
-      note: 'Save this access token in .env as KITE_ACCESS_TOKEN'
+      message: 'Session generated successfully and saved to database',
+      accessToken: session.access_token
     });
   } catch (error) {
     console.error('Error generating Kite session:', error);
@@ -57,15 +91,11 @@ router.post('/callback', async (req, res) => {
 // Import portfolio from Kite
 router.post('/import', async (req, res) => {
   try {
-    if (!kiteService.isConfigured()) {
+    const isConfigured = await kiteService.isConfigured();
+    if (!isConfigured) {
       return res.status(400).json({
-        error: 'Kite Connect not configured. Please set KITE_API_KEY and KITE_ACCESS_TOKEN in .env',
-        instructions: [
-          '1. Get API credentials from https://developers.kite.trade/',
-          '2. Add KITE_API_KEY, KITE_API_SECRET, and KITE_ACCESS_TOKEN to .env',
-          '3. Restart the backend server',
-          '4. If you don\'t have an access token, use GET /api/kite/login-url to start OAuth flow'
-        ]
+        error: 'Kite Connect not configured. Please connect your Zerodha account first',
+        needsAuth: true
       });
     }
 
@@ -126,16 +156,18 @@ router.post('/import', async (req, res) => {
 });
 
 // Get current Kite configuration status
-router.get('/status', (req, res) => {
-  const configured = kiteService.isConfigured();
+router.get('/status', async (req, res) => {
+  const configured = await kiteService.isConfigured();
+  const hasStoredToken = !!(await kiteService.getStoredAccessToken());
 
   res.json({
     configured,
     hasApiKey: !!process.env.KITE_API_KEY,
-    hasAccessToken: !!process.env.KITE_ACCESS_TOKEN,
+    hasAccessToken: hasStoredToken || !!process.env.KITE_ACCESS_TOKEN,
+    isAuthenticated: configured,
     message: configured
       ? 'Kite Connect is ready to use'
-      : 'Kite Connect needs configuration. Set KITE_API_KEY and KITE_ACCESS_TOKEN in .env'
+      : 'Please connect your Zerodha account'
   });
 });
 

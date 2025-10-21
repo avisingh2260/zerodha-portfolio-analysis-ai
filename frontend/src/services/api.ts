@@ -78,3 +78,25 @@ export const chatApi = {
     return response.data;
   }
 };
+
+export const kiteApi = {
+  getLoginUrl: async () => {
+    const response = await api.get('/kite/login-url');
+    return response.data;
+  },
+
+  handleCallback: async (requestToken: string) => {
+    const response = await api.post('/kite/callback', { request_token: requestToken });
+    return response.data;
+  },
+
+  importPortfolio: async () => {
+    const response = await api.post('/kite/import');
+    return response.data;
+  },
+
+  getStatus: async () => {
+    const response = await api.get('/kite/status');
+    return response.data;
+  }
+};

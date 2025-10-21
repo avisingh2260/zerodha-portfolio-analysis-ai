@@ -119,10 +119,12 @@ USE_MOCK_DATA=false
 4. Copy and paste into your `.env` file
 
 #### Zerodha Kite API (Optional)
-1. Visit [Kite Connect](https://kite.trade/)
+1. Visit [Kite Connect](https://developers.kite.trade/)
 2. Sign up for a developer account
 3. Create a new app
-4. Copy API Key and API Secret
+4. Set the **Redirect URL** to: `http://localhost:3001/api/kite/callback`
+5. Copy API Key and API Secret to your `.env` file
+6. You can now authenticate via the UI by clicking "Connect to Zerodha Kite"
 
 ## Running the Application
 
