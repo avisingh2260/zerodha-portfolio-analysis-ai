@@ -1,0 +1,45 @@
+{
+  "clientId": "YOUR_CLIENT_ID",
+  "portfolioName": "My Stock Portfolio",
+  "currency": "INR",
+  "asOfDate": "2024-10-24",
+  "holdings": [
+    {
+      "ticker": "RELIANCE",
+      "quantity": 50,
+      "purchasePrice": 2450.00,
+      "purchaseDate": "2024-01-15",
+      "currentPrice": 2580.00,
+      "currentValue": 129000.00,
+      "costBasis": 122500.00,
+      "gainLoss": 6500.00,
+      "gainLossPercent": 5.31
+    },
+    {
+      "ticker": "TCS",
+      "quantity": 30,
+      "purchasePrice": 3200.00,
+      "purchaseDate": "2024-02-20",
+      "currentPrice": 3450.00,
+      "currentValue": 103500.00,
+      "costBasis": 96000.00,
+      "gainLoss": 7500.00,
+      "gainLossPercent": 7.81
+    },
+    {
+      "ticker": "INFY",
+      "quantity": 40,
+      "purchasePrice": 1450.00,
+      "purchaseDate": "2024-03-10",
+      "currentPrice": 1520.00,
+      "currentValue": 60800.00,
+      "costBasis": 58000.00,
+      "gainLoss": 2800.00,
+      "gainLossPercent": 4.83
+    }
+  ],
+  "metadata": {
+    "source": "manual",
+    "createdAt": "2024-10-24T00:00:00.000Z"
+  }
+}

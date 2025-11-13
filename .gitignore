@@ -20,3 +20,8 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Database files
+*.db
+*.db-journal
+backend/data/*.db

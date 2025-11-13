@@ -66,7 +66,7 @@ class KiteService {
   }
 
   async getPortfolio() {
-    if (!this.isConfigured()) {
+    if (!(await this.isConfigured())) {
       throw new Error('Kite Connect is not configured. Please set KITE_API_KEY and KITE_ACCESS_TOKEN in .env');
     }
 
